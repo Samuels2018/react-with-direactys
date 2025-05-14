@@ -1,9 +1,12 @@
 // src/pages/Lobby.tsx
 import { useEffect, useState } from 'react';
-import { createDirectus } from '@directus/sdk';
+import {
+  lobbyGameState, 
+  lobbyGetPlayers,
+  lobbySubscribeToGameState
+} from '../services/lobbyService';
 import { useParams, useNavigate } from 'react-router-dom';
 
-//const directus = new createDirectus('http://tu-instancia-directus.com');
 
 export default function Lobby() {
   const { gameId } = useParams();
@@ -16,23 +19,15 @@ export default function Lobby() {
     const fetchGameData = async () => {
       try {
         // Obtener detalles del juego
-        const gameResponse = [] /*await directus.items('games').readOne(gameId, {
-          fields: ['id', 'nombre', 'estado']
-        });*/
+        const gameResponse = [] /*await lobbyGameState(gameId) */
         setGame(gameResponse);
 
         // Obtener jugadores (usando una colección intermedia si es necesario)
-        const playersResponse = [] /*await directus.items('players').readByQuery({
-          filter: { juegos: { _eq: gameId } },
-          fields: ['id', 'nombre', 'avatar']
-        });*/
+        const playersResponse = [] /*await lobbyGetPlayers(gameId) */
         setPlayers(playersResponse.data || []);
 
         // Suscribirse a cambios en el estado del juego
-        const subscription = [] /*await directus.realtime.subscribe('games', {
-          filter: { id: { _eq: gameId } },
-          query: { fields: ['estado'] }
-        });*/
+        const subscription = [] /*await lobbySubscribeToGameState(gameId) */
 
         subscription.subscribe((update) => {
           if (update.data[0].estado === 'en_progreso') {

@@ -3,7 +3,6 @@ import Register from './pages/Register';
 import Lobby from './pages/Lobby';
 import Game from './pages/Game';
 import Winner from './pages/Winner';
-import Test from './pages/test';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -16,7 +15,6 @@ function App() {
         <Route path="/lobby/:gameId" element={<Lobby />} />
         <Route path="/game/:gameId" element={<Game />} />
         <Route path="/winner/:gameId" element={<Winner />} />
-        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   );

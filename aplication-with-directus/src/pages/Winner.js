@@ -1,9 +1,7 @@
 // src/pages/Winner.tsx
 import { useEffect, useState } from 'react';
-import { createDirectus } from '@directus/sdk';
 import { useParams } from 'react-router-dom';
-
-//const directus = new createDirectus('http://tu-instancia-directus.com');
+import getWinners from '../services/winnerService';
 
 export default function Winner() {
   const { gameId } = useParams();
@@ -13,11 +11,7 @@ export default function Winner() {
   useEffect(() => {
     const fetchWinner = async () => {
       try {
-        const response = [] /*await directus.items('winners').readByQuery({
-          filter: { juego: { _eq: gameId } },
-          fields: ['*', 'jugador.nombre', 'jugador.avatar', 'carton.id'],
-          limit: 1
-        });*/
+        const response = [] /*await getWinners(gameId) */
 
         if (response.data && response.data.length > 0) {
           setWinner(response.data[0]);
